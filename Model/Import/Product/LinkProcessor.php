@@ -89,7 +89,6 @@ class LinkProcessor
         $resource = $this->linkFactory->create();
         $mainTable = $resource->getMainTable();
         $positionAttrId = [];
-        $nextLinkId = $this->resourceHelper->getNextAutoincrement($mainTable);
 
         // pre-load 'position' attributes ID for each link type once
         foreach ($this->linkNameToId as $linkId) {
@@ -103,6 +102,7 @@ class LinkProcessor
             $positionAttrId[$linkId] = $importEntity->getConnection()->fetchOne($select, $bind);
         }
         while ($bunch = $dataSourceModel->getNextBunch()) {
+            $nextLinkId = $this->resourceHelper->getNextAutoincrement($mainTable);
             $this->processLinkBunches($importEntity, $linkField, $bunch, $resource, $nextLinkId, $positionAttrId);
         }
     }
@@ -220,7 +220,7 @@ class LinkProcessor
         if (!empty($linksToDelete) && Import::BEHAVIOR_APPEND === $importEntity->getBehavior()) {
             foreach ($linksToDelete as $linkTypeId => $productIds) {
                 if (!empty($productIds)) {
-                    $whereLinkId = $importEntity->getConnection()->quoteInto('link_type_id', $linkTypeId);
+                    $whereLinkId = $importEntity->getConnection()->quoteInto('link_type_id = ?', $linkTypeId);
                     $whereProductId =  $importEntity->getConnection()->quoteInto(
                         'product_id IN (?)',
                         array_unique($productIds)
