@@ -1,0 +1,39 @@
+{
+    "name": "magenxcommerce/module-catalog-import-export",
+    "description": "N/A",
+    "type": "magento2-module",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "version": "101.1.2",
+    "require": {
+        "php": "~7.3.0||~7.4.0",
+        "ext-ctype": "*",
+        "magenxcommerce/framework": "103.0.*",
+        "magenxcommerce/module-catalog": "104.0.*",
+        "magenxcommerce/module-catalog-inventory": "100.4.*",
+        "magenxcommerce/module-catalog-url-rewrite": "100.4.*",
+        "magenxcommerce/module-customer": "103.0.*",
+        "magenxcommerce/module-eav": "102.1.*",
+        "magenxcommerce/module-import-export": "101.0.*",
+        "magenxcommerce/module-media-storage": "100.4.*",
+        "magenxcommerce/module-store": "101.1.*",
+        "magenxcommerce/module-tax": "100.4.*",
+        "magenxcommerce/module-authorization": "100.4.*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Magento\\CatalogImportExport\\": ""
+        }
+    },
+    "replace": {
+        "magento/module-catalog-import-export": "*"
+    }
+}
